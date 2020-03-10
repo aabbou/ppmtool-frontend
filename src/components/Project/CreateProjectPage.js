@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProjectForm from "./ProjectForm";
-import { createProject } from "../../actions/projectsActions";
+import { addProject } from "../../actions/projectsActions";
 import { connect } from "react-redux";
 
 class CreateProjectPage extends Component {
@@ -17,7 +17,7 @@ class CreateProjectPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createProject: (project, history) => dispatch(createProject(project, history))
+  createProject: (project, history) => dispatch(addProject(project, history))
 });
 
 const mapStateToProps = state => ({

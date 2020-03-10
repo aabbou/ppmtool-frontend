@@ -1,15 +1,28 @@
+import {
+  GET_PROJECTS,
+  ADD_PROJECT,
+  GET_PROJECT,
+  DELETE_PROJECT,
+  UPDATE_PROJECT,
+  GET_PROJECTS_SUCCESS,
+  ADD_PROJECT_SUCCESS,
+  GET_PROJECT_SUCCESS,
+  DELETE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_SUCCESS
+} from "./types";
+
 //
 //Saga
 //
-const getAllProjects = () => {
+const getProjects = () => {
   return {
-    type: "GET_PROJECTS"
+    type: GET_PROJECTS
   };
 };
 
-const createProject = (project, history) => {
+const addProject = (project, history) => {
   return {
-    type: "CREATE_PROJECT",
+    type: ADD_PROJECT,
     project,
     history
   };
@@ -17,14 +30,14 @@ const createProject = (project, history) => {
 
 const getProject = identifier => {
   return {
-    type: "GET_PROJECT",
+    type: GET_PROJECT,
     identifier
   };
 };
 
 const updateProject = (project, history) => {
   return {
-    type: "UPDATE_PROJECT",
+    type: UPDATE_PROJECT,
     project,
     history
   };
@@ -32,7 +45,7 @@ const updateProject = (project, history) => {
 
 const deleteProject = identifier => {
   return {
-    type: "DELETE_PROJECT",
+    type: DELETE_PROJECT,
     identifier
   };
 };
@@ -41,58 +54,51 @@ const deleteProject = identifier => {
 //Redux
 //
 
-const loadProjects = projects => {
+const getProjectsSuccess = projects => {
   return {
-    type: "LOAD_PROJECTS",
+    type: GET_PROJECTS_SUCCESS,
     projects
   };
 };
 
-const addProject = project => {
+const addProjectSuccess = project => {
   return {
-    type: "ADD_PROJECT",
+    type: ADD_PROJECT_SUCCESS,
     project
   };
 };
 
 const getProjectSuccess = project => {
   return {
-    type: "GET_PROJECT_SUCCESS",
+    type: GET_PROJECT_SUCCESS,
     project
   };
 };
 
 const deleteProjectSuccess = identifier => {
   return {
-    type: "DELETE_PROJECT_SUCCESS",
+    type: DELETE_PROJECT_SUCCESS,
     identifier
   };
 };
 
-const editProject = project => {
+const updateProjectSuccess = project => {
   return {
-    type: "EDIT_PROJECT",
+    type: UPDATE_PROJECT_SUCCESS,
     project
   };
 };
 
-const removeProject = id => {
-  return {
-    type: "REMOVE_PROJECT",
-    id
-  };
-};
-
 export {
-  loadProjects,
+  getProjects,
   addProject,
-  removeProject,
-  editProject,
-  createProject,
-  getAllProjects,
   getProject,
-  getProjectSuccess,
   updateProject,
-  deleteProjectSuccess,
-  deleteProject
+  deleteProject,
+  //
+  getProjectsSuccess,
+  addProjectSuccess,
+  getProjectSuccess,
+  updateProjectSuccess,
+  deleteProjectSuccess
 };

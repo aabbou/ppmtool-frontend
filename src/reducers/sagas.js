@@ -1,11 +1,19 @@
 import { call, put, takeEvery, all } from "redux-saga/effects";
 import {
-  addProject,
-  loadProjects,
+  addProjectSuccess,
+  getProjectsSuccess,
   getProjectSuccess,
-  editProject,
+  updateProjectSuccess,
   deleteProjectSuccess
 } from "../actions/projectsActions";
+
+import {
+  GET_PROJECTS,
+  ADD_PROJECT,
+  GET_PROJECT,
+  DELETE_PROJECT,
+  UPDATE_PROJECT
+} from "../actions/types";
 import axios from "axios";
 import { GET_ERRORS } from "../actions/types";
 
@@ -24,7 +32,7 @@ const deleteProjectAPI = projectId => axios.delete(`${apiUrl}/${projectId}`);
 function* createProject(action) {
   try {
     const response = yield call(postCreateProjectAPI, action.project);
-    yield put(addProject(response.data));
+    yield put(addProjectSuccess(response.data));
     yield action.history.push("/dashboard");
   } catch (err) {
     yield put({ type: GET_ERRORS, payload: err.response.data });
@@ -34,7 +42,7 @@ function* createProject(action) {
 function* updateProject(action) {
   try {
     const response = yield call(putUpdateProjectAPI, action.project);
-    yield put(editProject(response.data));
+    yield put(updateProjectSuccess(response.data));
     yield put({ type: GET_ERRORS, payload: {} });
     action.history.push("/dashboard");
   } catch (err) {
@@ -45,7 +53,7 @@ function* updateProject(action) {
 function* getAllProjects() {
   try {
     const response = yield call(getAllProjectsAPI);
-    yield put(loadProjects(response.data));
+    yield put(getProjectsSuccess(response.data));
     yield put({ type: GET_ERRORS, payload: {} });
   } catch (err) {
     yield put({ type: GET_ERRORS, payload: err.response.data });
@@ -73,23 +81,23 @@ function* deleteProject(action) {
 }
 
 function* createProjectSaga() {
-  yield takeEvery("CREATE_PROJECT", createProject);
+  yield takeEvery(ADD_PROJECT, createProject);
 }
 
 function* getAllProjectsSaga() {
-  yield takeEvery("GET_PROJECTS", getAllProjects);
+  yield takeEvery(GET_PROJECTS, getAllProjects);
 }
 
 function* getProjectSaga() {
-  yield takeEvery("GET_PROJECT", getProject);
+  yield takeEvery(GET_PROJECT, getProject);
 }
 
 function* putUpdateProjectSaga() {
-  yield takeEvery("UPDATE_PROJECT", updateProject);
+  yield takeEvery(UPDATE_PROJECT, updateProject);
 }
 
 function* deleteProjectSaga() {
-  yield takeEvery("DELETE_PROJECT", deleteProject);
+  yield takeEvery(DELETE_PROJECT, deleteProject);
 }
 
 export default function* rootSaga() {

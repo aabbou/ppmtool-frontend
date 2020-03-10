@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import ProjectItem from "./ProjectItem";
-import { getAllProjects } from "../../actions/projectsActions";
+import { getProjects } from "../../actions/projectsActions";
 
 class ProjectsList extends Component {
   render() {
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getProjects: () => dispatch(getAllProjects())
+  getProjects: () => dispatch(getProjects())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);

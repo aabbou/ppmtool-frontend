@@ -1,3 +1,11 @@
+import {
+  GET_PROJECTS_SUCCESS,
+  ADD_PROJECT_SUCCESS,
+  GET_PROJECT_SUCCESS,
+  DELETE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_SUCCESS
+} from "../actions/types";
+
 const projectReducerDefaultState = {
   projects: [],
   project: {}
@@ -6,26 +14,26 @@ const projectReducerDefaultState = {
 const projectsReducer = (state = projectReducerDefaultState, action) => {
   const { type, project, projects, identifier } = action;
   switch (type) {
-    case "LOAD_PROJECTS":
+    case GET_PROJECTS_SUCCESS:
       return { ...state, project: {}, projects: [...projects] };
-    case "ADD_PROJECT":
+    case ADD_PROJECT_SUCCESS:
       return {
         ...state,
         projects: [...state.projects, project]
       };
-    case "DELETE_PROJECT_SUCCESS":
+    case DELETE_PROJECT_SUCCESS:
       return {
         ...state,
         projects: [...state.projects].filter(
           pr => pr.projectIdentifier !== identifier
         )
       };
-    case "GET_PROJECT_SUCCESS":
+    case GET_PROJECT_SUCCESS:
       return {
         ...state,
         project: { ...project }
       };
-    case "EDIT_PROJECT":
+    case UPDATE_PROJECT_SUCCESS:
       return {
         ...state,
         projects: [...state.projects].map(pr => {
