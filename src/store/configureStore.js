@@ -2,11 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import projectsReducer from "../reducers/projectsReducer";
 import errorReducer from "../reducers/errorReducer";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "../reducers/sagas";
+import rootSaga from "../sagas/rootSaga";
+import backlogReducer from "../reducers/backlogReducer";
 
 const rootReducer = combineReducers({
   project: projectsReducer,
-  errors: errorReducer
+  errors: errorReducer,
+  backlog: backlogReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

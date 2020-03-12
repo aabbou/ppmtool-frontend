@@ -6,7 +6,7 @@ class ProjectForm extends Component {
     super(props);
 
     this.state = {
-      id: props.project ? (props.project.id ? props.project.id : 0) : 0,
+      id: props.project ? (props.project.id ? props.project.id : null) : null,
       projectName: props.project ? props.project.projectName : "",
       projectIdentifier: props.project ? props.project.projectIdentifier : "",
       description: props.project ? props.project.description : "",
@@ -62,7 +62,7 @@ class ProjectForm extends Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -71,7 +71,7 @@ class ProjectForm extends Component {
 
     if (nextProps.project) {
       this.setState({
-        id: nextProps.project.id || 0,
+        id: nextProps.project.id || null,
         projectName: nextProps.project.projectName || "",
         projectIdentifier: nextProps.project.projectIdentifier || "",
         description: nextProps.project.description || "",

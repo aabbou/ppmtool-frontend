@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import {
   addProjectSuccess,
   getProjectsSuccess,
@@ -33,6 +33,7 @@ function* createProject(action) {
   try {
     const response = yield call(postCreateProjectAPI, action.project);
     yield put(addProjectSuccess(response.data));
+    yield put({ type: GET_ERRORS, payload: {} });
     yield action.history.push("/dashboard");
   } catch (err) {
     yield put({ type: GET_ERRORS, payload: err.response.data });
@@ -80,32 +81,12 @@ function* deleteProject(action) {
   }
 }
 
-function* createProjectSaga() {
+function* ProjectSagas() {
   yield takeEvery(ADD_PROJECT, createProject);
-}
-
-function* getAllProjectsSaga() {
   yield takeEvery(GET_PROJECTS, getAllProjects);
-}
-
-function* getProjectSaga() {
   yield takeEvery(GET_PROJECT, getProject);
-}
-
-function* putUpdateProjectSaga() {
   yield takeEvery(UPDATE_PROJECT, updateProject);
-}
-
-function* deleteProjectSaga() {
   yield takeEvery(DELETE_PROJECT, deleteProject);
 }
 
-export default function* rootSaga() {
-  yield all([
-    createProjectSaga(),
-    getAllProjectsSaga(),
-    getProjectSaga(),
-    putUpdateProjectSaga(),
-    deleteProjectSaga()
-  ]);
-}
+export default ProjectSagas;
