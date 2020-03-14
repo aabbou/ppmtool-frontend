@@ -5,36 +5,48 @@ import Dashboard from "../components/Dashboard";
 import EditProjectPage from "../components/Project/EditProjectPage";
 import CreateProjectPage from "../components/Project/CreateProjectPage";
 import Header from "../components/Layout/Header";
-import LoginPage from "../components/LoginPage";
-import SignUpPage from "../components/SignUpPage";
+import LoginPage from "../components/User/LoginPage";
+import SignUpPage from "../components/User/SignUpPage";
 import ProjectDashboard from "../components/Projectboard/ProjectDashboard";
 import CreateProjectTaskPage from "../components/Projectboard/ProjectTask/CreateProjectTaskPage";
 import EditProjectTaskPage from "../components/Projectboard/ProjectTask/EditProjectTaskPage";
+import LandingPage from "../components/Layout/LandingPage";
+import SecuredRoute from "../security/SecuredRoute";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route exact path="/addProject" component={CreateProjectPage} />
-        <Route exact path="/editProject/:id" component={EditProjectPage} />
-        <Route exact path="/projectBoard/:id" component={ProjectDashboard} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signup" component={SignUpPage} />
 
-        <Route
+        <SecuredRoute exact path="/dashboard" component={Dashboard} />
+        <SecuredRoute exact path="/addProject" component={CreateProjectPage} />
+        <SecuredRoute
+          exact
+          path="/editProject/:id"
+          component={EditProjectPage}
+        />
+        <SecuredRoute
+          exact
+          path="/projectBoard/:id"
+          component={ProjectDashboard}
+        />
+
+        <SecuredRoute
           exact
           path="/addProjectTask/:id"
           component={CreateProjectTaskPage}
         />
-        <Route
+        <SecuredRoute
           exact
           path="/editProjectTask/:backlog_id/:pt_id"
           component={EditProjectTaskPage}
         />
 
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/signup" component={SignUpPage} />
-        <Route component={NotFoundPage} />
+        <SecuredRoute component={NotFoundPage} />
       </Switch>
     </BrowserRouter>
   );

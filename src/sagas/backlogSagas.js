@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { GET_ERRORS } from "../actions/types";
+import setJWTToken from "../security/securityUtils";
 import {
   addProjectTaskSuccess,
   getBacklogSuccess,
@@ -25,6 +26,8 @@ const postCreatePTAPI = (backlog_id, task) =>
 
 function* createProjectTask(action) {
   try {
+    const token = localStorage.getItem("jwtToken");
+    setJWTToken(token);
     const response = yield call(
       postCreatePTAPI,
       action.backlog_id,
