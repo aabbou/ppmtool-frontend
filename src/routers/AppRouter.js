@@ -46,7 +46,7 @@ const AppRouter = () => {
           component={EditProjectTaskPage}
         />
 
-        <SecuredRoute component={NotFoundPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>
   );

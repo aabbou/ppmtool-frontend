@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import { GET_ERRORS } from "../actions/types";
 
-const apiUrl = "http://localhost:8080/api/projects";
+const apiUrl = "/api/projects";
 
 const postCreateProjectAPI = project => axios.post(`${apiUrl}`, project);
 

@@ -6,7 +6,7 @@ import { setCurrentUser } from "../actions/securityActions";
 import jwt_decode from "jwt-decode";
 import setJWTToken from "../security/securityUtils";
 
-const apiUrl = "http://localhost:8080/api/users";
+const apiUrl = "/api/users";
 
 const postCreateUserAPI = user => axios.post(`${apiUrl}/register`, user);
 

@@ -19,7 +19,7 @@ import {
 
 import axios from "axios";
 
-const apiUrl = "http://localhost:8080/api/backlog";
+const apiUrl = "/api/backlog";
 
 const postCreatePTAPI = (backlog_id, task) =>
   axios.post(`${apiUrl}/${backlog_id}`, task);
